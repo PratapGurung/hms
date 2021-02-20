@@ -17,11 +17,12 @@ public class Customer {
     private String password;
     private String firstName;
     private String lastName;
+    private String email;
     private String phone;
-    private String address_line;
+    private String addressLine;
     private String city;
     private String state;
-    private String postal_code;
+    private String postalCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateJoined;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

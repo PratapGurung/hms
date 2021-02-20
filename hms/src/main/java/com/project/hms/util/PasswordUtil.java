@@ -10,7 +10,7 @@ public class PasswordUtil {
         return encoder.encode(password);
     }
 
- /*   public static void main(String[] args) {
-        System.out.println(encodePassword("user"));
+   /* public static void main(String[] args) {
+        System.out.println(encodePassword("userx"));
     }*/
 }

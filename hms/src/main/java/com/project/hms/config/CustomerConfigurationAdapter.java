@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Order(1)
+@Order(2)
 public class CustomerConfigurationAdapter extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService1(){
@@ -30,19 +30,21 @@ public class CustomerConfigurationAdapter extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService1()).passwordEncoder(passwordEncoder1());
     }
 
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .antMatcher("/customer/**")
+                .authorizeRequests().antMatchers("/resources/**", "/customer/signup/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home")
+                .and().formLogin().loginPage("/customer/login")
+                .defaultSuccessUrl("/customer/home", true)
                 .permitAll()
-                .and()
-                .logout().permitAll().logoutSuccessUrl("/login");
+                .and().logout().logoutUrl("/customer/logout").logoutSuccessUrl("/customer/login");
+
+        http.csrf().disable();
+
+
     }
 
 }

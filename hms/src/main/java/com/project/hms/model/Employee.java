@@ -10,27 +10,27 @@ import java.time.LocalDate;
 @Data
 @Table(name = "employee")
 public class Employee {
-
     @Id
     @GeneratedValue
     private int employeeId;
     private String username;
     private String password;
-    private String lasName;
+    private String lastName;
     private String firstName;
     private String phone;
     private String email;
-    private String address_line;
+    private String addressLine;
     private String city;
     private String state;
-    private String postal_code;
+    private String postalCode;
     private String country;
     @DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate hiredDate;
-    @ManyToOne
+    @OneToOne
     private Role role;
-    private int salaryPerHr;
-    private int hrsWorkPerWeek;
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @Transient
+    private int roleId;
+    /*@DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate lastPayDate;
+    private int hrsWorkPerWeek;*/
 }

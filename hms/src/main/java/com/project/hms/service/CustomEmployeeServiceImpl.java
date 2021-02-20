@@ -14,7 +14,7 @@ import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Service("CustomEmployeeServiceImpl")
+@Service
 public class CustomEmployeeServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -24,7 +24,7 @@ public class CustomEmployeeServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Employee employee = employeeRepository.findByUsername(username);
         if (employee == null){
-            throw new UsernameNotFoundException("Customer Not Found!!!");
+            throw new UsernameNotFoundException("Employee Not Found!!!");
         }
         return new org.springframework.security.core.userdetails.User(employee.getUsername(),
                 employee.getPassword(), true,true,true,true,

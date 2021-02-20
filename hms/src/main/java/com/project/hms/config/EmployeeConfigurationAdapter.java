@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -32,19 +32,24 @@ public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService2()).passwordEncoder(passwordEncoder2());
     }
 
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .antMatcher("/employee/**")
                 .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/employee/**").hasAnyAuthority("employee")
+                .antMatchers("/resources/**", "/employee/signup/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/employee")
-                .loginProcessingUrl("/employee/login")
-                .defaultSuccessUrl("/employee/home")
-                .permitAll()
+                .formLogin()
+                .loginPage("/employee/login")
+                .defaultSuccessUrl("/employee/home", true).permitAll()
                 .and()
-                .logout().permitAll().logoutSuccessUrl("/employee/login");
+                .logout().logoutUrl("/employee/logout").logoutSuccessUrl("/employee/login");
+        http.csrf().disable();
+
     }
+
 
 }

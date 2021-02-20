@@ -1,15 +1,18 @@
 package com.project.hms.service;
 
 import com.project.hms.model.Employee;
+import com.project.hms.model.Role;
 import com.project.hms.repository.EmployeeRepository;
 import com.project.hms.util.PasswordUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-
+    @Autowired
+    private RoleServiceImpl roleService;
     private final EmployeeRepository employeeRepository;
     public EmployeeServiceImpl(EmployeeRepository employeeRepository){
 
@@ -17,6 +20,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public void saveEmployee(Employee employee) {
+        Role role = roleService.getRole(employee.getRoleId());
+        employee.setRole(role);
+        System.out.println(role.getRoleName());
         String password = PasswordUtil.encodePassword(employee.getPassword());
         employee.setPassword(password);
         employeeRepository.save(employee);
