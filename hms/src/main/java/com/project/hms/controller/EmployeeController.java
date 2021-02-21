@@ -35,26 +35,27 @@ public class EmployeeController {
     }
 
     @PostMapping("/save_employee")
-    public String saveemployee(@ModelAttribute Employee employee){
+    public String saveEmployee(@ModelAttribute Employee employee){
         employeeService.saveEmployee(employee  );
         return "redirect:/employee/login";
     }
 
-    @PostMapping("/update_employee")
+    @PostMapping("/employee/update_employee")
     public String updateemployee(@ModelAttribute Employee employee){
         employeeService.updateEmployee(employee);
-        return "redirect:/list_employee";
+        return "redirect:/employee/list_employee";
     }
 
-    @GetMapping("/list_employee")
-    public String getAllemployee(Model model){
-        model.addAttribute("employees", employeeService.getAllEmployee());
-        return "listemployee";
+    @GetMapping("/employee/list_employee")
+    public String getAllemployee(@RequestParam String username, Model model){
+
+        model.addAttribute("employees", employeeService.getAllEmployeeToManage(username));
+        return "employee/listEmployee";
     }
-    @GetMapping("/delete_employee")
-    public String deleteemployee(@RequestParam int id){
+    @GetMapping("/employee/delete_employee")
+    public String deleteEmployee(@RequestParam int id){
         employeeService.deleteEmployee(id);
-        return "redirect:/list_employee";
+        return "redirect:/employee/list_employee";
     }
 
     /*@GetMapping("/employee/signup")
@@ -68,5 +69,8 @@ public class EmployeeController {
         return new ModelAndView("employee/signup")  ;
     }
 
-
+    @GetMapping("/employee/manageEmployee")
+    public ModelAndView manageEmployee(Model model) {
+        return new ModelAndView("employee/manageEmployee")  ;
+    }
 }

@@ -24,7 +24,7 @@ public class Employee {
     private String state;
     private String postalCode;
     private String country;
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate hiredDate;
     @OneToOne
     private Role role;
@@ -33,4 +33,6 @@ public class Employee {
     /*@DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate lastPayDate;
     private int hrsWorkPerWeek;*/
+
+    private String reportsTo;
 }

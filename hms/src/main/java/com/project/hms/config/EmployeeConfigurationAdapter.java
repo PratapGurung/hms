@@ -38,7 +38,7 @@ public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/employee/**")
                 .authorizeRequests()
-                .antMatchers("/employee/**").hasAnyAuthority("employee")
+               /* .antMatchers("/employee/**").hasAnyAuthority("employee")*/
                 .antMatchers("/resources/**", "/employee/signup/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

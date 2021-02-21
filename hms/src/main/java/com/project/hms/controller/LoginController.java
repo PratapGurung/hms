@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
+    /*
+        Customer login controller
+     */
     @RequestMapping("/")
     public ModelAndView defaultHome() {
         return new ModelAndView("home");
@@ -23,10 +26,16 @@ public class LoginController {
 
     @RequestMapping("/customer")
     public ModelAndView customer() {
+        if (isAuthenticated()) {
+            return new ModelAndView("redirect:/customer/home");
+        }
         return new ModelAndView("customer/login");
     }
     @RequestMapping("/customer/login")
     public ModelAndView login() {
+        if (isAuthenticated()) {
+            return new ModelAndView("redirect:/customer/home");
+        }
         return new ModelAndView("customer/login");
     }
 
@@ -34,7 +43,7 @@ public class LoginController {
     public ModelAndView customerHome() {
         System.out.println("hello");
         if (!isAuthenticated()) {
-            return new ModelAndView("redirect:customer/login");
+            return new ModelAndView("redirect:/customer/login");
         }
         else{
             return new ModelAndView("customer/home");
@@ -42,21 +51,25 @@ public class LoginController {
 
     }
 
+
+    /*
+        employee login controller
+     */
     @RequestMapping("/employee")
     public ModelAndView employee() {
-        return new ModelAndView("employee/login");
+        return new ModelAndView("/employee/login");
     }
 
     @RequestMapping("/employee/login")
     public ModelAndView employeelogin() {
-        return new ModelAndView("employee/login");
+        return new ModelAndView("/employee/login");
     }
 
 
     @RequestMapping("/employee/home")
     public ModelAndView employeehome() {
         if (!isAuthenticated()) {
-            return new ModelAndView("redirect:employee/login");
+            return new ModelAndView("redirect:/employee/login");
         }
 
         return new ModelAndView("employee/home");

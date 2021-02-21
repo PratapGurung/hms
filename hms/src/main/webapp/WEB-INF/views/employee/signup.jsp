@@ -65,8 +65,8 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col">
-                                    <label>Date of Birth: </label>
-                                    <input type="date" name="dateOfBirth" class="form-control">
+                                    <label>Hired Date: </label>
+                                    <input type="date" name="hiredDate" class="form-control">
                                 </div>
                                 <div class="col">
                                     <label>Role: </label>

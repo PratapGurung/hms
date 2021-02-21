@@ -12,5 +12,5 @@ public interface EmployeeService {
     void deleteEmployee(int id);
     Employee getEmployee(int id);
     List<Employee> getAllEmployee();
-
+    List<Employee> getAllEmployeeToManage(String username);
 }

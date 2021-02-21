@@ -22,6 +22,9 @@
             <li class="nav-item">
                 <a href="" class="nav-link">My Paystub</a>
             </li>
+            <li class="nav-item">
+                <a href="/employee/manageEmployee" class="nav-link">Manage Employee</a>
+            </li>
             <%--<li class="nav-item">
                 <a href="" class="nav-link">${principal.role.roleName}</a>
             </li>--%>
