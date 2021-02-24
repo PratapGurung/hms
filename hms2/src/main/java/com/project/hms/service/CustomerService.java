@@ -1,4 +1,3 @@
-/*
 package com.project.hms.service;
 
 import com.project.hms.model.Customer;
@@ -12,4 +11,3 @@ public interface CustomerService {
     Customer getCustomer(int id);
     List<Customer> getAllCustomer();
 }
-*/

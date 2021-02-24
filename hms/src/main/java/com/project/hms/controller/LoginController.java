@@ -1,10 +1,12 @@
 package com.project.hms.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,29 +28,18 @@ public class LoginController {
 
     @RequestMapping("/customer")
     public ModelAndView customer() {
-        if (isAuthenticated()) {
-            return new ModelAndView("redirect:/customer/home");
-        }
         return new ModelAndView("customer/login");
     }
     @RequestMapping("/customer/login")
-    public ModelAndView login() {
-        if (isAuthenticated()) {
-            return new ModelAndView("redirect:/customer/home");
-        }
+    public ModelAndView clogin() {
+
         return new ModelAndView("customer/login");
     }
 
-    @RequestMapping("/customer/home")
-    public ModelAndView customerHome() {
-        System.out.println("hello");
-        if (!isAuthenticated()) {
-            return new ModelAndView("redirect:/customer/login");
-        }
-        else{
-            return new ModelAndView("customer/home");
-        }
 
+    @RequestMapping("/customer/pages/home")
+    public ModelAndView customerHome() {
+        return new ModelAndView("customer/pages/home");
     }
 
 
@@ -66,13 +57,9 @@ public class LoginController {
     }
 
 
-    @RequestMapping("/employee/home")
+    @RequestMapping("/employee/pages/home")
     public ModelAndView employeehome() {
-        if (!isAuthenticated()) {
-            return new ModelAndView("redirect:/employee/login");
-        }
-
-        return new ModelAndView("employee/home");
+        return new ModelAndView("employee/pages/home");
     }
 
 

@@ -38,13 +38,13 @@ public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/employee/**")
                 .authorizeRequests()
-               /* .antMatchers("/employee/**").hasAnyAuthority("employee")*/
+                .antMatchers("/employee/pages/**").hasAnyAuthority("employee","supervisor","manager")
                 .antMatchers("/resources/**", "/employee/signup/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/employee/login")
-                .defaultSuccessUrl("/employee/home", true).permitAll()
+                .defaultSuccessUrl("/employee/pages/home", true).permitAll()
                 .and()
                 .logout().logoutUrl("/employee/logout").logoutSuccessUrl("/employee/login");
         http.csrf().disable();

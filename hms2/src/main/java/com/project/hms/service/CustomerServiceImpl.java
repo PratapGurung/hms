@@ -1,15 +1,13 @@
-/*
 package com.project.hms.service;
 
 import com.project.hms.model.Customer;
 import com.project.hms.repository.CustomerRepository;
 import com.project.hms.util.PasswordUtil;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-*/
-/*
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -21,27 +19,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer(Customer customer) {
         //encode password
-        *//*
-
-*/
-/*String password = PasswordUtil.encodePassword(customer.getPassword());
-        customer.setPassword(password);*//*
-*/
-/*
-
+        /*String password = PasswordUtil.encodePassword(customer.getPassword());
+        customer.setPassword(password);*/
         customerRepository.save(customer);
     }
 
     @Override
     public void updateCustomer(Customer customer) {
-        *//*
-
-*/
-/*String password = PasswordUtil.encodePassword(customer.getPassword());
-        customer.setPassword(password);*//*
-*/
-/*
-
+        /*String password = PasswordUtil.encodePassword(customer.getPassword());
+        customer.setPassword(password);*/
         customerRepository.save(customer);
     }
 
@@ -60,5 +46,3 @@ public class CustomerServiceImpl implements CustomerService {
         return (List<Customer>) customerRepository.findAll();
     }
 }
-*/
-

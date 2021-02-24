@@ -1,4 +1,3 @@
-/*
 package com.project.hms.controller;
 
 import com.project.hms.service.CustomerService;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CustomerController {
@@ -51,5 +51,8 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return "redirect:/list_customer";
     }
+    @GetMapping("/customer/signup")
+    public ModelAndView customerSignUp() {
+        return new ModelAndView("customer/signup");
+    }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 package com.project.hms.model;
 
 import lombok.Data;
@@ -8,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-*/
-/*
 @Entity
 @Data
 @Table(name = "room")
@@ -20,5 +17,3 @@ public class Room {
     private int roomNumber;
     private Boolean available;
 }
-*/
-

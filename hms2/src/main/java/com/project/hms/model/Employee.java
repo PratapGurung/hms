@@ -3,34 +3,36 @@ package com.project.hms.model;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-//import javax.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-/*
 @Entity
 @Data
 @Table(name = "employee")
-public class Employee extends User {
-
+public class Employee {
     @Id
     @GeneratedValue
     private int employeeId;
-    private String lasName;
+    private String username;
+    private String password;
+    private String lastName;
     private String firstName;
     private String phone;
     private String email;
-    private String address_line;
+    private String addressLine;
     private String city;
     private String state;
-    private String postal_code;
+    private String postalCode;
     private String country;
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate hiredDate;
-    @ManyToOne
+    @OneToOne
     private Role role;
-    private int salaryPerHr;
-    private int hrsWorkPerWeek;
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @Transient
+    private int roleId;
+    /*@DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate lastPayDate;
+    private int hrsWorkPerWeek;*/
+
+    private String reportsTo;
 }
-*/

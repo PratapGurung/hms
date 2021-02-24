@@ -1,9 +1,9 @@
-/*
 package com.project.hms.service;
 
 import com.project.hms.model.Customer;
 import com.project.hms.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
-*/
-/*
 @Service
 public class CustomCustomerServiceImpl implements UserDetailsService {
 
@@ -38,5 +36,3 @@ public class CustomCustomerServiceImpl implements UserDetailsService {
         return authorities;
     }
 }
-*/
-

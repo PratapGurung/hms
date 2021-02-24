@@ -1,44 +1,87 @@
 package com.project.hms.controller;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping
 public class LoginController {
 
+    /*
+        Customer login controller
+     */
     @RequestMapping("/")
     public ModelAndView defaultHome() {
-        return new ModelAndView("login");
+        return new ModelAndView("home");
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/home")
+    public ModelAndView home() {
+        return new ModelAndView("home");
+    }
+
+    @RequestMapping("/customer")
+    public ModelAndView customer() {
+        if (isAuthenticated()) {
+            return new ModelAndView("redirect:/customer/home");
+        }
+        return new ModelAndView("customer/login");
+    }
+    @RequestMapping("/customer/login")
     public ModelAndView login() {
-        return new ModelAndView("login");
+        if (isAuthenticated()) {
+            return new ModelAndView("redirect:/customer/home");
+        }
+        return new ModelAndView("customer/login");
     }
 
-    @RequestMapping("/dashboard")
-    public ModelAndView userDashboard() {
-        return new ModelAndView("dashboard");
+    @RequestMapping("/customer/home")
+    public ModelAndView customerHome() {
+        System.out.println("hello");
+        if (!isAuthenticated()) {
+            return new ModelAndView("redirect:/customer/login");
+        }
+        else{
+            return new ModelAndView("customer/home");
+        }
+
     }
 
-    @RequestMapping("/admin/")
-    public ModelAndView admin() {
-        return new ModelAndView("admin/login");
+
+    /*
+        employee login controller
+     */
+    @RequestMapping("/employee")
+    public ModelAndView employee() {
+        return new ModelAndView("/employee/login");
     }
 
-    @RequestMapping("/admin/login")
-    public ModelAndView adminlogin() {
-        return new ModelAndView("admin/login");
+    @RequestMapping("/employee/login")
+    public ModelAndView employeelogin() {
+        return new ModelAndView("/employee/login");
     }
 
-    @RequestMapping("/admin/dashboard")
-    public ModelAndView admindashboard() {
-        return new ModelAndView("admin/dashboard");
+
+    @RequestMapping("/employee/home")
+    public ModelAndView employeehome() {
+        if (!isAuthenticated()) {
+            return new ModelAndView("redirect:/employee/login");
+        }
+
+        return new ModelAndView("employee/home");
+    }
+
+
+    private boolean isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || AnonymousAuthenticationToken.class.
+                isAssignableFrom(authentication.getClass())) {
+            return false;
+        }
+        return authentication.isAuthenticated();
     }
 }

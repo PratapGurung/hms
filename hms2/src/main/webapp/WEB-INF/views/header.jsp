@@ -4,13 +4,7 @@
 
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <sec:authentication property="principal" var="principal"></sec:authentication>
-<%--<nav>
-    <a href="home">Home</a>
-    <a href="list_customer">Customer</a>
-    <a href="add_customer">Add Customer</a>
-    <a href="logout">Logout</a>
-    <a>${principal.username}</a>
-</nav>--%>
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Hotel Management System</a>
@@ -20,22 +14,28 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a href="home" class="nav-link">Home</a>
+                <a href="" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="list_customer" class="nav-link">List Customer</a>
+                <a href="#" class="nav-link">Services</a>
             </li>
             <li class="nav-item">
-                <a href="add_customer" class="nav-link">Add Customer</a>
+                <a href="#" class="nav-link">Offers</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">My reservation</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact us</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ${principal.username}
+                    <i class="bi bi-arrow-down-circle-fill"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="logout">Logout</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="/orders">Orders</a>
+                    <a class="dropdown-item" href="/customer/login">Sign In</a>
+                    <a class="dropdown-item" href="/employee/login">Employee Account</a>
                 </div>
             </li>
         </ul>

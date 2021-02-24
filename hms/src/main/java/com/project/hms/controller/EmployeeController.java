@@ -50,7 +50,7 @@ public class EmployeeController {
     public String getAllemployee(@RequestParam String username, Model model){
 
         model.addAttribute("employees", employeeService.getAllEmployeeToManage(username));
-        return "employee/listEmployee";
+        return "employee/pages/listEmployee";
     }
     @GetMapping("/employee/delete_employee")
     public String deleteEmployee(@RequestParam int id){
@@ -71,6 +71,6 @@ public class EmployeeController {
 
     @GetMapping("/employee/manageEmployee")
     public ModelAndView manageEmployee(Model model) {
-        return new ModelAndView("employee/manageEmployee")  ;
+        return new ModelAndView("employee/pages/manageEmployee")  ;
     }
 }
