@@ -46,7 +46,9 @@ public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
                 .loginPage("/employee/login")
                 .defaultSuccessUrl("/employee/pages/home", true).permitAll()
                 .and()
-                .logout().logoutUrl("/employee/logout").logoutSuccessUrl("/employee/login");
+                .logout().logoutUrl("/employee/logout").logoutSuccessUrl("/employee/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/employee/accessdenied");
         http.csrf().disable();
 
     }

@@ -29,14 +29,14 @@ public class LoginController {
         if (isAuthenticated()) {
             return new ModelAndView("redirect:/customer/home");
         }
-        return new ModelAndView("customer/login");
+        return new ModelAndView("login/customer/login");
     }
     @RequestMapping("/customer/login")
     public ModelAndView login() {
         if (isAuthenticated()) {
             return new ModelAndView("redirect:/customer/home");
         }
-        return new ModelAndView("customer/login");
+        return new ModelAndView("login/customer/login");
     }
 
     @RequestMapping("/customer/home")
@@ -57,12 +57,12 @@ public class LoginController {
      */
     @RequestMapping("/employee")
     public ModelAndView employee() {
-        return new ModelAndView("/employee/login");
+        return new ModelAndView("login/employee/login");
     }
 
     @RequestMapping("/employee/login")
     public ModelAndView employeelogin() {
-        return new ModelAndView("/employee/login");
+        return new ModelAndView("login/employee/login");
     }
 
 

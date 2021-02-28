@@ -48,10 +48,11 @@ public class CustomerConfigurationAdapter extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/customer/signup/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/customer/login")
-                .successHandler(new RefererRedirectionAuthenticationSuccessHandler())
                 .defaultSuccessUrl("/customer/pages/home", true)
                 .permitAll()
-                .and().logout().logoutUrl("/customer/logout").logoutSuccessUrl("/customer/login");
+                .and().logout().logoutUrl("/customer/logout").logoutSuccessUrl("/customer/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/customer/accessdenied");
 
         http.csrf().disable();
 

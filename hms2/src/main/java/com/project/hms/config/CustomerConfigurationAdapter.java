@@ -34,8 +34,10 @@ public class CustomerConfigurationAdapter extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .antMatcher("/customer/**")
-                .authorizeRequests().antMatchers("/resources/**", "/customer/signup/**").permitAll()
+                /*.antMatcher("/login/customer/**")*/
+                .authorizeRequests()
+                .antMatchers("/resources/**", "/customer/signup/**").permitAll()
+                .antMatchers("/customer/**").hasAuthority("customer")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/customer/login")
                 .defaultSuccessUrl("/customer/home", true)

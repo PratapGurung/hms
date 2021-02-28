@@ -30,10 +30,18 @@ public class LoginController {
     public ModelAndView customer() {
         return new ModelAndView("customer/login");
     }
+
     @RequestMapping("/customer/login")
     public ModelAndView clogin() {
-
+        if(isAuthenticated()){
+            return new ModelAndView("redirect:/customer/pages/home");
+        }
         return new ModelAndView("customer/login");
+    }
+
+    @RequestMapping("/customer/accessdenied")
+    public ModelAndView accessDenied() {
+        return new ModelAndView("redirect:/customer/login");
     }
 
 
@@ -53,6 +61,9 @@ public class LoginController {
 
     @RequestMapping("/employee/login")
     public ModelAndView employeelogin() {
+        if(isAuthenticated()){
+            return new ModelAndView("redirect:/employee/pages/home");
+        }
         return new ModelAndView("/employee/login");
     }
 
@@ -62,6 +73,10 @@ public class LoginController {
         return new ModelAndView("employee/pages/home");
     }
 
+    @RequestMapping("/employee/accessdenied")
+    public ModelAndView employeeAccessDenied() {
+        return new ModelAndView("redirect:/employee/login");
+    }
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
