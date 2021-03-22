@@ -3,7 +3,6 @@ package com.project.hms.service;
 import com.project.hms.model.Customer;
 import com.project.hms.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +20,8 @@ public class CustomCustomerServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Customer customer = customerRepository.findByUsername(username);
+
+        Customer customer = customerRepository.findByUsername(username).get();
         if(customer == null){
             throw  new UsernameNotFoundException("Customer Not found!!!");
         }

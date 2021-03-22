@@ -3,6 +3,18 @@
 <script type="text/javascript" src="/resources/js/login.js" ></script>
 <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js" ></script>
 <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js" ></script>
+<%--
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<script>
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+</script>
+--%>
 
 <div class="container">
 
@@ -20,6 +32,7 @@
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+           <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         </form>
         <%-- <a><button class="btn btn-lg btn-secondary btn-block btn-signup" type="button" >Sign up</button></a><!-- /form -->--%>
         <a href="/employee/signup" class="btn btn-info" role="button">Sign Up</a>

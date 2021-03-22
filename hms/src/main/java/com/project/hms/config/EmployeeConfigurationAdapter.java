@@ -49,6 +49,8 @@ public class EmployeeConfigurationAdapter extends WebSecurityConfigurerAdapter {
                 .logout().logoutUrl("/employee/logout").logoutSuccessUrl("/employee/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/employee/accessdenied");
+
+
         http.csrf().disable();
 
     }

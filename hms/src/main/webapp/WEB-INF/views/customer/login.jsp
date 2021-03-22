@@ -4,8 +4,21 @@
 <script type="text/javascript" src="/resources/js/jquery-3.5.1.min.js" ></script>
 <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js" ></script>
 
-<div class="container">
+<%--
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<script>
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
 
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+</script>
+--%>
+
+<div class="container">
+    <div id="output"></div>
     <div class="card card-container">
         <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
@@ -14,6 +27,7 @@
             <span id="reauth-email" class="reauth-email"></span>
             <input type="text" id="inputEmail" class="form-control" placeholder="Username"  name="username"  required autofocus>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password"  name="password" required>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div id="remember" class="checkbox">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me

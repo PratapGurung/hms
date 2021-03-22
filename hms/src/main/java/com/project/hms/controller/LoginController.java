@@ -5,10 +5,11 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Logger;
 
 @Controller
 public class LoginController {
@@ -16,6 +17,8 @@ public class LoginController {
     /*
         Customer login controller
      */
+    private Logger logger =
+            Logger.getLogger(LoginController.class.getName());
     @RequestMapping("/")
     public ModelAndView defaultHome() {
         return new ModelAndView("home");
@@ -23,6 +26,7 @@ public class LoginController {
 
     @RequestMapping("/home")
     public ModelAndView home() {
+        logger.info("Test method called");
         return new ModelAndView("home");
     }
 
@@ -33,7 +37,12 @@ public class LoginController {
 
     @RequestMapping("/customer/login")
     public ModelAndView clogin() {
-        if(isAuthenticated()){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("customer"));
+        if(isAuthenticated() && hasUserRole){
             return new ModelAndView("redirect:/customer/pages/home");
         }
         return new ModelAndView("customer/login");
@@ -61,7 +70,11 @@ public class LoginController {
 
     @RequestMapping("/employee/login")
     public ModelAndView employeelogin() {
-        if(isAuthenticated()){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("employee"));
+        if(isAuthenticated() && hasUserRole){
             return new ModelAndView("redirect:/employee/pages/home");
         }
         return new ModelAndView("/employee/login");
@@ -75,6 +88,7 @@ public class LoginController {
 
     @RequestMapping("/employee/accessdenied")
     public ModelAndView employeeAccessDenied() {
+        System.out.println(isAuthenticated());
         return new ModelAndView("redirect:/employee/login");
     }
 

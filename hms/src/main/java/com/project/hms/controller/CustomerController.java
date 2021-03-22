@@ -1,16 +1,18 @@
 package com.project.hms.controller;
 
+import com.project.hms.model.Otp;
 import com.project.hms.service.CustomerService;
 import com.project.hms.model.Customer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import javax.servlet.http.HttpServletResponse;
+
+@RestController
 public class CustomerController {
 
     private CustomerService customerService;
@@ -18,8 +20,10 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/add_customer")
-    public String getCustomerForm(){
+
+   @PostMapping("/add_customer")
+    public String getCustomerForm(@RequestBody Customer customer){
+        customerService.saveCustomer(customer);
         return "addCustomer";
     }
 
@@ -29,16 +33,30 @@ public class CustomerController {
         return "editCustomer";
     }
 
+    @PostMapping("/auth")
+    public void auth(@RequestBody Customer customer){
+        customerService.auth(customer);
+    }
+
+    @PostMapping("otp/check")
+    public void check(@RequestBody Otp otp, HttpServletResponse response){
+        if(customerService.check(otp)){
+            System.out.println("hello it worked");
+            response.setStatus((HttpServletResponse.SC_OK));
+        }else {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        }
+    }
     @PostMapping("/save_customer")
     public String saveCustomer(@ModelAttribute Customer customer){
         customerService.saveCustomer(customer);
         return "redirect:/list_customer";
     }
 
-    @PostMapping("/update_customer")
+    @PostMapping("/customer/update_customer")
     public String updateCustomer(@ModelAttribute Customer customer){
         customerService.updateCustomer(customer);
-        return "redirect:/list_customer";
+        return "redirect:/customer/pages/home";
     }
 
     @GetMapping("/list_customer")
@@ -55,4 +73,23 @@ public class CustomerController {
     public ModelAndView customerSignUp() {
         return new ModelAndView("customer/signup");
     }
+
+   @RequestMapping("/customer/edit/phone")
+    public String changePhone(Model model){
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       Customer customer = customerService.getCustomer(authentication.getName());
+       model.addAttribute("customer", customer);
+       return "customer/pages/changePhone";
+    }
+
+    @RequestMapping("/customer/update/phone")
+    public String updatePhone(@RequestParam("phone") String phone,Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerService.getCustomer(authentication.getName());
+        model.addAttribute("customer", customer);
+        System.out.println(phone);
+        customerService.updatePhone(customer,phone);
+        return "redirect:/customer/pages/home";
+    }
+
 }
